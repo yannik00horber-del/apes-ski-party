@@ -1,12 +1,46 @@
 /* ============================================================
    Après-Ski Party Gossau – Script
-   Mobile-Navigation, aktuelles Jahr im Footer,
+   Mobile-Navigation, aktuelles Jahr im Footer, Scroll-Reveal,
    Cookie-Consent (localStorage) & verzögertes Laden von Google Maps
    ============================================================ */
 (function () {
   "use strict";
 
   var CONSENT_KEY = "apresSkiCookieConsent";
+
+  /* ---------- Beim Neuladen immer zuoberst starten ----------
+     Ohne das springt der Browser beim Refresh zurück zum zuletzt
+     angesteuerten Abschnitt (z. B. #faq) bzw. zur alten Scrollposition.
+     Ein frisch geöffneter Link mit Anker (z. B. geteilt als …/#tickets)
+     funktioniert weiterhin normal. */
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  function isReload() {
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+      if (nav && nav.type) return nav.type === "reload";
+      return !!(performance.navigation && performance.navigation.type === 1);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  if (isReload()) {
+    var root = document.documentElement;
+    var prevBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+
+    if (location.hash) {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    window.scrollTo(0, 0);
+    window.addEventListener("load", function () {
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = prevBehavior;
+    });
+  }
 
   /* ---------- Aktuelles Jahr im Footer ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
@@ -41,6 +75,30 @@
     if (navOverlay) navOverlay.addEventListener("click", closeNav);
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
+    });
+  }
+
+  /* ---------- Scroll-Reveal ---------- */
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealEls = document.querySelectorAll(".reveal");
+  if (revealEls.length && !reduceMotion && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealEls.forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    revealEls.forEach(function (el) {
+      el.classList.add("in-view");
     });
   }
 

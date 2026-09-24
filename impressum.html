@@ -9,7 +9,22 @@
   <link rel="canonical" href="https://www.apres-ski-party-gossau.ch/impressum.html">
   <meta name="theme-color" content="#071525">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <noscript>
+    <style>
+      /* Ohne JavaScript alle Inhalte sofort sichtbar zeigen */
+      .reveal{opacity:1 !important;transform:none !important}
+      /* und die Navigation als einfache Liste statt als Burger-Menü */
+      .nav-toggle{display:none !important}
+      .navlinks{position:static !important;transform:none !important;width:auto !important;
+        height:auto !important;background:none !important;padding:0 !important;
+        flex-direction:row !important;flex-wrap:wrap !important;gap:14px !important;
+        justify-content:flex-end !important;font-size:12px !important}
+    </style>
+  </noscript>
 </head>
 <body class="subpage legal-page">
 
@@ -17,16 +32,18 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a href="index.html"><img class="club-logo" src="skiclub-gossau-logo.jpeg" alt="Skiclub Gossau Logo"></a>
+    <a href="index.html"><img class="club-logo" width="200" height="200" decoding="async" src="party-emblem.svg" alt="Après-Ski Party Gossau"></a>
     <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navlinks">
       <span></span>
     </button>
     <div class="navlinks" id="navlinks">
+      <a href="index.html#sponsoren">SPONSOREN</a>
       <a href="index.html#event">EVENT</a>
-      <a href="index.html#dj">DJ</a>
       <a href="index.html#location">LOCATION</a>
+      <a href="index.html#dj">DJ</a>
       <a href="index.html#tickets">TICKETS</a>
-      <a href="index.html#infos">INFOS</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#club">CLUB</a>
     </div>
   </div>
   <div class="nav-overlay"></div>
@@ -96,10 +113,11 @@
 <footer>
   <div class="wrap footer-inner">
     <div>
-      <img class="footer-logo" src="skiclub-gossau-logo.jpeg" alt="Skiclub Gossau Logo">
+      <img decoding="async" loading="lazy" width="480" height="120" class="footer-logo" src="skiclub-gossau-logo-trim.png" alt="Skiclub Gossau Logo">
     </div>
     <div>© <span data-year>2027</span> Skiclub Gossau · Après-Ski Party Gossau</div>
     <div class="footer-links">
+      <a href="mailto:info@skiclub-gossau.ch">Kontakt</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
       <button type="button" id="footerCookieSettings">Cookie-Einstellungen</button>
