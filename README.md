@@ -12,7 +12,9 @@ datenschutz.html      Datenschutzerklärung
 css/style.css        Gesamtes Styling
 js/main.js            Mobile-Menü, Cookie-Consent, verzögertes Laden von Google Maps
 404.html              Fehlerseite für nicht gefundene Adressen
-share-image.png       Vorschaubild fürs Teilen (WhatsApp, Instagram, Facebook)
+share-image.png       Vorschaubild fürs Teilen (WhatsApp, Instagram, Facebook) – aus dem Flyer erstellt
+flyer/                Offizieller Event-Flyer: volle Auflösung (Grossansicht/Download)
+                      und eine verkleinerte Version (-800) für die Anzeige auf der Seite
 .htaccess             verweist Fehler 404 auf 404.html (nur Apache-Hosting)
 robots.txt            Anweisungen für Suchmaschinen
 sitemap.xml            Sitemap für Suchmaschinen
@@ -23,11 +25,46 @@ sponsoren/            Logos der Sponsoren (aktuell: Horber Innenausbau)
 skiclub-gossau-logo.jpeg  Original-Logo (unverändert, wird im Footer verwendet)
 skiclub-gossau-logo-trim.png  Original-Logo ohne weissen Rand, für die Navigation
 skiclub-gossau-logo-transparent.png  Invers-Version (weisse Schrift, transparent) für den dunklen Hero-Bereich
-dj-logo.jpeg          Logo/Bild DJ Beatstyle
+dj-logo.jpeg          Foto DJ Beatstyle
+dj-beatstyle-logo.svg  Logo DJ Beatstyle (weiss, transparent) – im Hero und im DJ-Bereich
 ```
 
-Startseiten-Reihenfolge: Sponsoren (ganz oben, direkt nach dem Hero-Bereich) →
-Event → DJ → Location → Tickets → FAQ → Club/Mitglieder-Werbung → Infos.
+Startseiten-Reihenfolge: Hero (nachempfunden dem Flyer) → Sponsoren → Event
+(Infos, Location, Flyer) → DJ → Tickets → FAQ → Club/Mitglieder-Werbung.
+
+## Design (abgestimmt auf den Flyer)
+
+Farben und Schriften sind aus dem offiziellen Flyer übernommen und zentral als
+Variablen ganz oben in `css/style.css` (`:root`) hinterlegt:
+
+| Variable        | Farbe     | Einsatz                                  |
+|-----------------|-----------|------------------------------------------|
+| `--night`       | `#070927` | Seitenhintergrund (Nachthimmel)          |
+| `--night-2`     | `#0e1442` | Karten, Info-Boxen                       |
+| `--pink`        | `#ff2e93` | Neon-Akzente, Glow                       |
+| `--magenta`     | `#e0177f` | Buttons, Pinselstrich, Ticket-Bereich    |
+| `--pink-soft`   | `#ffaadd` | «PARTY»-Schriftzug, Pinsel-Akzente       |
+| `--cyan`        | `#64e9ee` | Info-Texte, Labels (wie auf dem Flyer)   |
+
+Schriften: «Poppins» (fette Titel wie «APRÈS SKI»), «Permanent Marker»
+(Pinsel-Schrift wie «PARTY»), «Saira Condensed» (schmale Info-Zeilen, Menü,
+Buttons) und «Inter» (Fliesstext).
+
+Der Hero-Bereich (Sonne mit Streifen, Laser-Linien, Bergkette, Tannen,
+Lichterkette) ist komplett mit CSS und einem eingebetteten SVG gezeichnet –
+er skaliert deshalb ohne Qualitätsverlust auf jede Bildschirmgrösse.
+
+## Flyer austauschen
+
+Kommt eine neue Version des Flyers, einfach die beiden Dateien in `flyer/`
+mit gleichem Namen ersetzen:
+
+- `apres-ski-party-2027-flyer.jpg` – volle Auflösung (Grossansicht und Download)
+- `apres-ski-party-2027-flyer-800.jpg` – gleiche Datei, auf 800 px Breite verkleinert
+
+Hat der neue Flyer ein anderes Seitenverhältnis als 1131 × 1600, in
+`index.html` beim Flyer-Bild die Angaben `width`/`height` sowie in
+`css/style.css` bei `.flyer-open img` das `aspect-ratio` anpassen.
 
 Alles ist rein statisch – die Dateien können 1:1 per FTP/SFTP oder über die
 Datei-Upload-Funktion eines beliebigen Webhosting-Anbieters (z. B. Hostpoint,
@@ -43,10 +80,10 @@ Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
    als Platzhalter eingetragen (in `index.html`, `impressum.html`,
    `datenschutz.html`, `robots.txt`, `sitemap.xml`). Durch die echte, beim
    Hoster registrierte Domain ersetzen.
-2. **Eventfrog-Link** – in `index.html` beim Kommentar
-   `<!-- EVENTFROG_LINK_HIER_EINSETZEN -->` den `href="#"` des Ticket-Buttons
-   durch den echten Eventfrog-Link ersetzen und die `onclick`-Zeile mit dem
-   Alert-Hinweis entfernen.
+2. **Eventfrog-Link** – ✅ erledigt. Der Ticket-Button und die strukturierten
+   Event-Daten verlinken direkt auf die Eventfrog-Seite (derselbe Link, auf
+   den auch der QR-Code des Flyers weiterleitet). Ändert sich der Link, in
+   `index.html` nach `eventfrog.ch` suchen (2 Stellen).
 3. **Hosting-Anbieter** – in `datenschutz.html`, Abschnitt 3 „Hosting &
    Server-Logfiles“, den Platzhalter `[Name und Sitz des Hosting-Anbieters
    einsetzen, sobald bekannt]` durch den tatsächlichen Anbieter ersetzen.
@@ -72,10 +109,10 @@ Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
    `application/ld+json`-Block mit Datum, Ort, Preis und Veranstalter (damit
    Google die Party als Event erkennen kann). Wenn sich Datum, Preis oder Ort
    ändern, diesen Block **zusätzlich** zum sichtbaren Text anpassen.
-7. **Vorschaubild beim Teilen** – `share-image.png` (1200 × 630) ist
-   hinterlegt und zeigt Logo, Titel, Datum und Ort. Sobald der Event-Flyer
-   fertig ist, kann es durch ein Flyer-Motiv ersetzt werden – gleiche Grösse
-   und gleicher Dateiname, dann muss sonst nichts angepasst werden.
+7. **Vorschaubild beim Teilen** – ✅ `share-image.png` (1200 × 630) zeigt jetzt
+   den Flyer mit Datum, Ort und Ticketinfo. Wird der Flyer geändert, das Bild
+   in gleicher Grösse und mit gleichem Dateinamen ersetzen (unter 300 KB
+   halten, sonst zeigt WhatsApp keine Vorschau).
 
 ## Cookie-Consent & Google Maps
 
@@ -99,13 +136,13 @@ die `.htaccess` gelöscht werden.
 
 ## Schriften (Google Fonts)
 
-Die Website lädt die Schriften «Anton» und «Inter» von Google Fonts. Dabei wird
+Die Website lädt die Schriften «Poppins», «Permanent Marker», «Saira Condensed» und «Inter» von Google Fonts. Dabei wird
 die IP-Adresse der Besucher:innen an Google übermittelt – das ist in der
 Datenschutzerklärung unter Ziffer 6 offengelegt. Wer das vermeiden möchte, kann
-die beiden Schriften herunterladen (z. B. über den «google-webfonts-helper»),
+die Schriften herunterladen (z. B. über den «google-webfonts-helper»),
 die Dateien in einen Ordner `fonts/` legen und in `css/style.css` per
-`@font-face` einbinden; danach die beiden `fonts.googleapis.com`-Zeilen aus dem
-Kopfbereich der drei HTML-Dateien entfernen. Die Seite lädt dann etwas schneller
+`@font-face` einbinden; danach die `fonts.googleapis.com`-Zeilen aus dem
+Kopfbereich der vier HTML-Dateien entfernen. Die Seite lädt dann etwas schneller
 und funktioniert auch komplett offline.
 
 ## Party-Emblem

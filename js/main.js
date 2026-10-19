@@ -78,6 +78,61 @@
     });
   }
 
+  /* ---------- Navigation: Hintergrund beim Scrollen ---------- */
+  var navEl = document.querySelector("nav");
+  if (navEl) {
+    var updateNav = function () {
+      navEl.classList.toggle("is-scrolled", window.scrollY > 40);
+    };
+    updateNav();
+    window.addEventListener("scroll", updateNav, { passive: true });
+  }
+
+  /* ---------- Flyer: Grossansicht ---------- */
+  document.querySelectorAll("[data-lightbox]").forEach(function (link) {
+    var dialog = document.getElementById(link.getAttribute("data-lightbox"));
+    if (!dialog || typeof dialog.showModal !== "function") return; // ältere Browser: Link öffnet das Bild normal
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      dialog.showModal();
+    });
+    dialog.addEventListener("click", function (e) {
+      // Klick auf den abgedunkelten Hintergrund oder das Schliessen-Kreuz schliesst die Ansicht
+      if (e.target === dialog || e.target.hasAttribute("data-lightbox-close")) dialog.close();
+    });
+  });
+
+  /* ---------- Flyer: Teilen (nur wo das Gerät es unterstützt, v. a. Smartphones) ---------- */
+  var shareBtn = document.getElementById("flyerShare");
+  if (shareBtn && navigator.share) {
+    shareBtn.hidden = false;
+    shareBtn.addEventListener("click", function () {
+      var data = {
+        title: "Après-Ski Party Gossau – 17.04.2027",
+        text: "Season End Party mit dem Skiclub Gossau – Sa, 17.04.2027, ab 14 Uhr, Markthalle Gossau. Im Après-Ski-Outfit gratis!",
+        url: location.origin && location.origin !== "null" ? location.origin + location.pathname : undefined
+      };
+      var flyerUrl = "flyer/apres-ski-party-2027-flyer.jpg";
+      var shareLink = function () {
+        return navigator.share(data).catch(function () {});
+      };
+      if (!window.fetch || !window.File || !navigator.canShare) {
+        shareLink();
+        return;
+      }
+      fetch(flyerUrl)
+        .then(function (r) { return r.blob(); })
+        .then(function (blob) {
+          var file = new File([blob], "Apres-Ski-Party-Gossau-2027-Flyer.jpg", { type: "image/jpeg" });
+          if (navigator.canShare({ files: [file] })) {
+            return navigator.share({ files: [file], title: data.title, text: data.text }).catch(function () {});
+          }
+          return shareLink();
+        })
+        .catch(shareLink);
+    });
+  }
+
   /* ---------- Scroll-Reveal ---------- */
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var revealEls = document.querySelectorAll(".reveal");
