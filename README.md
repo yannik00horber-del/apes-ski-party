@@ -76,17 +76,16 @@ automatisch als Startseite ausgeliefert wird.
 
 Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
 
-1. **Domain** – aktuell ist überall `https://www.apres-ski-party-gossau.ch/`
-   als Platzhalter eingetragen (in `index.html`, `impressum.html`,
-   `datenschutz.html`, `robots.txt`, `sitemap.xml`). Durch die echte, beim
-   Hoster registrierte Domain ersetzen.
+1. **Domain** – ✅ erledigt: `https://apresskipartygossau.ch/` ist in
+   `index.html`, `impressum.html`, `datenschutz.html`, `robots.txt` und
+   `sitemap.xml` eingetragen.
 2. **Eventfrog-Link** – ✅ erledigt. Der Ticket-Button und die strukturierten
    Event-Daten verlinken direkt auf die Eventfrog-Seite (derselbe Link, auf
    den auch der QR-Code des Flyers weiterleitet). Ändert sich der Link, in
    `index.html` nach `eventfrog.ch` suchen (2 Stellen).
-3. **Hosting-Anbieter** – in `datenschutz.html`, Abschnitt 3 „Hosting &
-   Server-Logfiles“, den Platzhalter `[Name und Sitz des Hosting-Anbieters
-   einsetzen, sobald bekannt]` durch den tatsächlichen Anbieter ersetzen.
+3. **Hosting-Anbieter** – ✅ erledigt: GitHub Pages (GitHub, Inc., USA) ist in
+   `datenschutz.html`, Abschnitt 3, eingetragen. Bei einem Wechsel des Hosters
+   diesen Abschnitt anpassen.
 4. Adresse, Kontakt-E-Mails und Vereinsdaten in `impressum.html` und
    `datenschutz.html` auf Richtigkeit prüfen.
 5. **Sponsoren** – Sponsor 1 (Horber Innenausbau) ist bereits eingesetzt; das
@@ -113,6 +112,30 @@ Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
    den Flyer mit Datum, Ort und Ticketinfo. Wird der Flyer geändert, das Bild
    in gleicher Grösse und mit gleichem Dateinamen ersetzen (unter 300 KB
    halten, sonst zeigt WhatsApp keine Vorschau).
+
+## Veröffentlichung (GitHub Pages)
+
+Die Website wird über GitHub Pages direkt aus diesem Repository veröffentlicht
+(Branch `main`, Ordner `/`). Die leere Datei `.nojekyll` sorgt dafür, dass
+GitHub die Dateien unverändert ausliefert.
+
+- **Pages einschalten:** Repository → Settings → Pages → Source «Deploy from a
+  branch», Branch `main`, Ordner `/ (root)`.
+- **Domain:** unter Custom domain `apresskipartygossau.ch` eintragen. GitHub
+  legt dabei selbst eine Datei `CNAME` im Repository an – danach einmal
+  `git pull`, sonst schlägt der nächste Push fehl.
+- **DNS beim Domain-Anbieter:**
+  - `A`-Records für `@`: `185.199.108.153`, `185.199.109.153`,
+    `185.199.110.153`, `185.199.111.153`
+  - optional `AAAA` für `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
+    `2606:50c0:8002::153`, `2606:50c0:8003::153`
+  - `CNAME` für `www`: `yannik00horber-del.github.io`
+- **HTTPS:** sobald die Domain erkannt ist, «Enforce HTTPS» anhaken (kann bis
+  zu 24 Stunden dauern).
+- **Updates:** Änderungen committen und pushen – nach ca. 1 Minute sind sie live.
+
+Die `.htaccess` wird von GitHub Pages ignoriert; die `404.html` wird dort
+automatisch als Fehlerseite verwendet.
 
 ## Cookie-Consent & Google Maps
 
