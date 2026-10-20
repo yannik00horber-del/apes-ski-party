@@ -94,15 +94,14 @@ Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
    Adress- und Telefonzeilen des Inserats). Eine Website ist dort nicht
    bekannt, deshalb ist diese Karte noch nicht verlinkt – sobald eine URL
    vorliegt, das `<div class="sponsor-card">` gemäss Kommentar im Code durch
-   ein `<a …>` ersetzen. Für die übrigen Karten:
-   - Logo-Datei in einen neuen Ordner `sponsoren/` legen (idealerweise PNG
-     mit transparentem Hintergrund, quadratisch/querformatig).
-   - Im `<a class="sponsor-card" ...>`-Tag den `href="#"` durch die echte
-     Website-URL des Sponsors ersetzen (inkl. `https://`).
-   - Innerhalb des `<a>`-Tags `<span class="sponsor-logo">SPONSOR 1</span>`
-     durch `<img src="sponsoren/logo1.png" alt="Name des Sponsors">` ersetzen.
-   - Werden weniger als 10 Sponsoren gebraucht, überzählige `<a class="sponsor-card">…</a>`-Blöcke
-     einfach löschen; das Raster passt sich automatisch an.
+   ein `<a …>` ersetzen. Weitere Sponsoren hinzufügen:
+   - Logo-Datei in den Ordner `sponsoren/` legen (idealerweise PNG mit
+     transparentem Hintergrund, querformatig).
+   - In `index.html` im Block `sponsor-grid` eine weitere Karte nach dem
+     Muster im Kommentar einfügen (mit Website als `<a class="sponsor-card" …>`,
+     ohne Website als `<div class="sponsor-card">`).
+   - Das Layout passt sich automatisch an: ein einzelner Sponsor erscheint
+     als grosse Karte, mehrere Sponsoren auf dem Handy zu zweit nebeneinander.
 
 6. **Strukturierte Event-Daten** – in `index.html` steht im Kopfbereich ein
    `application/ld+json`-Block mit Datum, Ort, Preis und Veranstalter (damit

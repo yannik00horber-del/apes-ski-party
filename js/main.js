@@ -109,7 +109,7 @@
     shareBtn.addEventListener("click", function () {
       var data = {
         title: "Après-Ski Party Gossau – 17.04.2027",
-        text: "Season End Party mit dem Skiclub Gossau – Sa, 17.04.2027, ab 14 Uhr, Markthalle Gossau. Im Après-Ski-Outfit gratis!",
+        text: "Après-Ski Party mit dem Skiclub Gossau – Sa, 17.04.2027, ab 14 Uhr, Markthalle Gossau. Gratis-Shot im Après-Ski-Outfit!",
         url: location.origin && location.origin !== "null" ? location.origin + location.pathname : undefined
       };
       var flyerUrl = "flyer/apres-ski-party-2027-flyer.jpg";
