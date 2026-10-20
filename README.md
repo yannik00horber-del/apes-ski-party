@@ -100,8 +100,9 @@ Folgende Platzhalter unbedingt vor dem Live-Schalten ersetzen:
    - In `index.html` im Block `sponsor-grid` eine weitere Karte nach dem
      Muster im Kommentar einfügen (mit Website als `<a class="sponsor-card" …>`,
      ohne Website als `<div class="sponsor-card">`).
-   - Das Layout passt sich automatisch an: ein einzelner Sponsor erscheint
-     als grosse Karte, mehrere Sponsoren auf dem Handy zu zweit nebeneinander.
+   - Das Layout passt sich automatisch an: auf dem Computer stehen die
+     Karten nebeneinander (bei Platzmangel in mehreren Reihen), auf dem Handy
+     untereinander.
 
 6. **Strukturierte Event-Daten** – in `index.html` steht im Kopfbereich ein
    `application/ld+json`-Block mit Datum, Ort, Preis und Veranstalter (damit
@@ -132,6 +133,11 @@ GitHub die Dateien unverändert ausliefert.
 - **HTTPS:** sobald die Domain erkannt ist, «Enforce HTTPS» anhaken (kann bis
   zu 24 Stunden dauern).
 - **Updates:** Änderungen committen und pushen – nach ca. 1 Minute sind sie live.
+- **Browser-Cache:** CSS und JavaScript sind mit einer Versionsnummer
+  eingebunden (`css/style.css?v=20261020`). Nach Änderungen an `style.css` oder
+  `main.js` diese Nummer in allen vier HTML-Dateien erhöhen (z. B. auf das
+  aktuelle Datum), sonst sehen Besucher:innen bis zu 10 Minuten lang die alte
+  Version.
 
 Die `.htaccess` wird von GitHub Pages ignoriert; die `404.html` wird dort
 automatisch als Fehlerseite verwendet.
