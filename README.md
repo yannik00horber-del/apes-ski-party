@@ -134,7 +134,7 @@ GitHub die Dateien unverändert ausliefert.
   zu 24 Stunden dauern).
 - **Updates:** Änderungen committen und pushen – nach ca. 1 Minute sind sie live.
 - **Browser-Cache:** CSS und JavaScript sind mit einer Versionsnummer
-  eingebunden (`css/style.css?v=20261020`). Nach Änderungen an `style.css` oder
+  eingebunden (`css/style.css?v=20261105`). Nach Änderungen an `style.css` oder
   `main.js` diese Nummer in allen vier HTML-Dateien erhöhen (z. B. auf das
   aktuelle Datum), sonst sehen Besucher:innen bis zu 10 Minuten lang die alte
   Version.
